@@ -53,7 +53,7 @@ public class SystemInfo implements Comparable {
 //      System.out.println("FreeSwapSpaceSize: " + bean.getFreeSwapSpaceSize());
 //      System.out.println("CommittedVirtualMemorySize: " + bean.getCommittedVirtualMemorySize());
 //      System.out.println("load: " + bean.getSystemLoadAverage());
-
+/*
       Sigar sigar = new Sigar();
       CpuPerc perc = sigar.getCpuPerc();
       System.out.println("整体cpu的占用情况:");
@@ -68,7 +68,14 @@ public class SystemInfo implements Comparable {
         System.out.println("conbined: "+ cpuPercs[i].getCombined());//获取当前cpu的占用率
         System.out.println();
       }
+*/
+      while(true) {
+        Sigar sigar = new Sigar();
+        CpuPerc perc = sigar.getCpuPerc();
+        System.out.println("sigar cpu usage: " + perc.getCombined());
 
+        System.out.println("cpu monitor usage: " + CpuUsageMonitor.getCpuUsage());
+      }
     }
 
 }
