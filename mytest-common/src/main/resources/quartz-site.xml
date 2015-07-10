@@ -1,0 +1,7 @@
+<configuration>
+  <property> 
+    <name>quartz.defalut.groupname</name> 
+    <value>mygroup</value> 
+  </property> 
+
+</configuration>

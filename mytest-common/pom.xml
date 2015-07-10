@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.armon.test</groupId>
+		<artifactId>mytest-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+	<artifactId>mytest-common</artifactId>
+	<name>mytest-common</name>
+
+	<properties>
+		<build.finalname>mytest-common</build.finalname>
+		<netty.version>3.2.4.Final</netty.version>
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<quartz.version>2.2.1</quartz.version>
+		<hadoop.version>2.3.0</hadoop.version>
+		<jersey.version>2.18</jersey.version>
+	</properties>
+
+	<dependencies>
+		<!-- netty -->
+     <dependency>
+			 <groupId>org.jboss.netty</groupId>
+			 <artifactId>netty</artifactId>
+			 <version>${netty.version}</version>
+		 </dependency>
+		
+		 <!-- quartz -->		
+		 <dependency>
+       <groupId>org.quartz-scheduler</groupId>
+       <artifactId>quartz</artifactId>
+       <version>${quartz.version}</version>
+     </dependency>
+     <dependency>
+       <groupId>org.quartz-scheduler</groupId>
+       <artifactId>quartz-jobs</artifactId>
+       <version>${quartz.version}</version>
+     </dependency>
+     
+     <!-- hadoop -->		
+		 <dependency>
+       <groupId>org.apache.hadoop</groupId>
+       <artifactId>hadoop-common</artifactId>
+       <version>${hadoop.version}</version>
+     </dependency>
+     
+     <!--sigar -->
+     <dependency>
+       <groupId>org.hyperic</groupId>
+       <artifactId>sigar</artifactId>
+       <version>1.6.4</version>
+     </dependency>
+     
+     <!--akka -->
+     <dependency>
+        <groupId>com.typesafe.akka</groupId>
+        <artifactId>akka-actor</artifactId>
+        <version>2.0.5</version>
+     </dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>${build.finalname}</finalName>
+	</build>
+</project>
