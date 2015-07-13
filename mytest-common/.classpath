@@ -192,6 +192,5 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-jdbc/4.1.6.RELEASE/spring-jdbc-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/4.1.6.RELEASE/spring-tx-4.1.6.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/4.1.6.RELEASE/spring-test-4.1.6.RELEASE.jar"/>
-	<classpathentry kind="lib" path="/Users/guangming/Downloads/libsigar-universal64-macosx.dylib"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

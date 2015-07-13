@@ -1,6 +1,7 @@
 package com.armon.test.systeminfo;
 
 import org.hyperic.sigar.CpuPerc;
+import org.hyperic.sigar.Mem;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
@@ -58,18 +59,24 @@ public class SystemInfo implements Comparable {
     // System.out.println("CommittedVirtualMemorySize: " +
     // bean.getCommittedVirtualMemorySize());
     // System.out.println("load: " + bean.getSystemLoadAverage());
+
+     Sigar sigar = new Sigar();
+     CpuPerc perc = sigar.getCpuPerc();
+     System.out.println("整体cpu的占用情况:");
+     System.out.println("system idle: " + perc.getIdle());
+     //获取当前cpu的空闲率
+     System.out.println("system usage: " + perc.getCombined());//获取当前cpu的占用率
+
+     // 物理内存信息
+     Mem mem = sigar.getMem();
+     // 内存总量
+     System.out.println("Total = " + mem.getTotal() / 1024L / 1024 + "M av");
+     // 当前内存使用量
+     System.out.println("Used = " + mem.getUsed() / 1024L / 1024 + "M used");
+     // 当前内存剩余量
+     System.out.println("Free = " + mem.getFree() / 1024L / 1024 + "M free");
+
     /*
-     * Sigar sigar = new Sigar(); CpuPerc perc = sigar.getCpuPerc();
-     * System.out.println("整体cpu的占用情况:"); System.out.println("system idle: " +
-     * perc.getIdle());//获取当前cpu的空闲率 System.out.println("system usage: "+
-     * perc.getCombined());//获取当前cpu的占用率
-     *
-     * CpuPerc[] cpuPercs = sigar.getCpuPercList();
-     * System.out.println("每个cpu的资源占用情况:"); for (int i = 0; i < cpuPercs.length;
-     * i++) { System.out.println("cpu " + i); System.out.println("system idle: "
-     * + cpuPercs[i].getIdle());//获取当前cpu的空闲率 System.out.println("conbined: "+
-     * cpuPercs[i].getCombined());//获取当前cpu的占用率 System.out.println(); }
-     */
     while (true) {
       Sigar sigar = new Sigar();
       CpuPerc perc = sigar.getCpuPerc();
@@ -79,6 +86,7 @@ public class SystemInfo implements Comparable {
 
       Thread.sleep(1000);
     }
+    */
   }
 
 }
