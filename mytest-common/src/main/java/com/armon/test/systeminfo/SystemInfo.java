@@ -75,6 +75,10 @@ public class SystemInfo implements Comparable {
      System.out.println("Used = " + mem.getUsed() / 1024L / 1024 + "M used");
      // 当前内存剩余量
      System.out.println("Free = " + mem.getFree() / 1024L / 1024 + "M free");
+     // 当前内存使用率
+     System.out.println("内存使用率=" + mem.getUsedPercent());
+     // 当前内存空闲率
+     System.out.println("内存空闲率=" + mem.getFreePercent());
 
     /*
     while (true) {
