@@ -1,10 +1,3 @@
-/*
- * 蘑菇街 Inc.
- * Copyright (c) 2010-2016 All Rights Reserved.
- *
- * Author: guangming
- * Create Date: 2016年1月26日 下午3:32:14
- */
 
 package org.mytest.storm.spouts;
 
@@ -20,10 +13,6 @@ import backtype.storm.topology.base.BaseRichSpout;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Values;
 
-/**
- * @author guangming
- *
- */
 public class WordReader extends BaseRichSpout {
 
     private SpoutOutputCollector collector;

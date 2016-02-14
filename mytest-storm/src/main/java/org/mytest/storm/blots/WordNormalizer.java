@@ -1,10 +1,3 @@
-/*
- * 蘑菇街 Inc.
- * Copyright (c) 2010-2016 All Rights Reserved.
- *
- * Author: guangming
- * Create Date: 2016年1月27日 上午9:33:17
- */
 
 package org.mytest.storm.blots;
 
@@ -15,10 +8,6 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-/**
- * @author guangming
- *
- */
 public class WordNormalizer extends BaseBasicBolt{
 
     @Override

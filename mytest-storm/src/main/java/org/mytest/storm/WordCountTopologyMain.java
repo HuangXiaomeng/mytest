@@ -1,11 +1,3 @@
-/*
- * 蘑菇街 Inc.
- * Copyright (c) 2010-2016 All Rights Reserved.
- *
- * Author: guangming
- * Create Date: 2016年1月27日 上午9:50:53
- */
-
 package org.mytest.storm;
 
 import org.mytest.storm.blots.WordCounter;
@@ -17,10 +9,6 @@ import backtype.storm.LocalCluster;
 import backtype.storm.topology.TopologyBuilder;
 import backtype.storm.tuple.Fields;
 
-/**
- * @author guangming
- *
- */
 public class WordCountTopologyMain {
     public static void main(String[] args) throws InterruptedException {
         // Topology definition

@@ -13,7 +13,7 @@ struct THelloWorldResponse {
 1: required TMytestStatus status
 }
 
-service MytestService
+service HelloWorldService
 {
   THelloWorldResponse sayHello(1:THelloWorldRequest request)
 }

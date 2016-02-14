@@ -2,7 +2,7 @@ package org.armon.test.service.thrift;
 
 import org.apache.thrift.TException;
 
-public class MytestServiceImpl implements MytestService.Iface {
+public class HelloWorldServiceImpl implements HelloWorldService.Iface {
 
 	@Override
 	public THelloWorldResponse sayHello(THelloWorldRequest request)

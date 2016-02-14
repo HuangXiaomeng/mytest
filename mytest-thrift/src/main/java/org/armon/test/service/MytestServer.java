@@ -6,8 +6,8 @@ import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TThreadPoolServer;
 import org.apache.thrift.server.TThreadPoolServer.Args;
 import org.apache.thrift.transport.TServerSocket;
-import org.armon.test.service.thrift.MytestService;
-import org.armon.test.service.thrift.MytestServiceImpl;
+import org.armon.test.service.thrift.HelloWorldService;
+import org.armon.test.service.thrift.HelloWorldServiceImpl;
 
 public class MytestServer {
 	public static final int SERVER_PORT = 8090;
@@ -16,8 +16,8 @@ public class MytestServer {
 		try {
 			System.out.println("HelloWorld TThreadPoolServer start ....");
 
-			TProcessor tprocessor = new MytestService.Processor<MytestService.Iface>(
-					new MytestServiceImpl());
+			TProcessor tprocessor = new HelloWorldService.Processor<HelloWorldService.Iface>(
+					new HelloWorldServiceImpl());
 			TServerSocket serverTransport = new TServerSocket(SERVER_PORT);
 
 			// 线程池服务模型，使用标准的阻塞式IO，预先创建一组线程处理请求。

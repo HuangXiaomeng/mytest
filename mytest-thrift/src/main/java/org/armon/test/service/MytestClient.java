@@ -6,7 +6,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
-import org.armon.test.service.thrift.MytestService;
+import org.armon.test.service.thrift.HelloWorldService;
 import org.armon.test.service.thrift.THelloWorldRequest;
 import org.armon.test.service.thrift.THelloWorldResponse;
 
@@ -30,7 +30,7 @@ public class MytestClient {
 			TProtocol protocol = new TBinaryProtocol(transport);
 			// TProtocol protocol = new TCompactProtocol(transport);
 			// TProtocol protocol = new TJSONProtocol(transport);
-			MytestService.Client client = new MytestService.Client(protocol);
+			HelloWorldService.Client client = new HelloWorldService.Client(protocol);
 
 			String[] dataList = { "hello", "hello1", "HELLO", "hello2" };
 			for (String data : dataList) {

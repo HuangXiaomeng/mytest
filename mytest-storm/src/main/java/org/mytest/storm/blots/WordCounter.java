@@ -1,11 +1,3 @@
-/*
- * 蘑菇街 Inc.
- * Copyright (c) 2010-2016 All Rights Reserved.
- *
- * Author: guangming
- * Create Date: 2016年1月27日 上午9:41:19
- */
-
 package org.mytest.storm.blots;
 
 import java.util.Map;
@@ -18,10 +10,6 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.base.BaseBasicBolt;
 import backtype.storm.tuple.Tuple;
 
-/**
- * @author guangming
- *
- */
 public class WordCounter extends BaseBasicBolt {
     private Integer id;
     private String name;
