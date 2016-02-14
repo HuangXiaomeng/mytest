@@ -10,8 +10,9 @@ public class Main {
 
   public static void main(String[] args) {
     ApplicationContext ac = new ClassPathXmlApplicationContext("context.xml");
-    MyServer server = ac.getBean(MyServer.class);
-    ClientService service = server.getClientService();
+//    MyServer server = ac.getBean(MyServer.class);
+//    ClientService service = server.getClientService();
+    ClientService service = ac.getBean(ClientService.class);
     Client client = service.queryClient("10.11.128.60", 10001);
     printClient(client);
   }

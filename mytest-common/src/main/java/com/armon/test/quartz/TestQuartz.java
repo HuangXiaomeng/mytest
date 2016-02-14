@@ -21,17 +21,17 @@ import org.quartz.impl.matchers.KeyMatcher;
 
 public class TestQuartz {
 	private static Scheduler scheduler;
-	public static Map<JobKey, MyJobDescriptor> jobMap = 
+	public static Map<JobKey, MyJobDescriptor> jobMap =
 			new HashMap<JobKey, MyJobDescriptor>();
-	public static Map<JobKey, MyJobStatus> jobStatusMap = 
+	public static Map<JobKey, MyJobStatus> jobStatusMap =
 			new HashMap<JobKey, MyJobStatus>();
-	
+
 	public static void main(String[] args) throws SchedulerException, ParseException, InterruptedException {
 		initScheduler();
 		initJob();
 		scheduleJob();
 	}
-	
+
 	public static void initScheduler() {
 		try {
 			scheduler = new StdSchedulerFactory().getScheduler();
@@ -40,7 +40,7 @@ public class TestQuartz {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
 	public static void initJob() {
 		Configuration conf = QuartzConfiguration.create();
 		String groupid = conf.get("quartz.defalut.groupname", "test");
@@ -54,7 +54,7 @@ public class TestQuartz {
 		jobMap.put(key1, job1);
 		jobMap.put(key2, job2);
 		jobMap.put(key3, job3);
-		
+
 		MyJobStatus status1 = new MyJobStatus("job1");
 		MyJobStatus status2 = new MyJobStatus("job2");
 		MyJobStatus status3 = new MyJobStatus("job3");
@@ -62,15 +62,15 @@ public class TestQuartz {
 		jobStatusMap.put(key2, status2);
 		jobStatusMap.put(key3, status3);
 	}
-	
+
 	public static void scheduleJob() throws ParseException, SchedulerException {
-		MyJobChainingJobListener chainListener = new MyJobChainingJobListener("workflow1"); 
-		
+		MyJobChainingJobListener chainListener = new MyJobChainingJobListener("workflow1");
+
 		for (Map.Entry<JobKey, MyJobDescriptor> entry : jobMap.entrySet()) {
 			MyJobDescriptor jobDescriptor = entry.getValue();
 			Trigger trigger = null;
 			if (jobDescriptor.getCronException() != null) {
-//				trigger = new CronTriggerImpl(jobDescriptor.getJobid(), 
+//				trigger = new CronTriggerImpl(jobDescriptor.getJobid(),
 //						jobDescriptor.getGroupid(), jobDescriptor.getCronException());
 				trigger = TriggerBuilder.newTrigger()
 						.withIdentity(jobDescriptor.getJobid(), jobDescriptor.getGroupid())
@@ -78,14 +78,14 @@ public class TestQuartz {
 						.startNow()
 						.build();
 			} else {
-//				trigger = new SimpleTriggerImpl(jobDescriptor.getJobid(), 
+//				trigger = new SimpleTriggerImpl(jobDescriptor.getJobid(),
 //						jobDescriptor.getGroupid());
 				trigger = TriggerBuilder.newTrigger()
 						.withIdentity(jobDescriptor.getJobid(), jobDescriptor.getGroupid())
 						.startNow()
 						.build();
 			}
-//			JobDetail job = new JobDetailImpl(jobDescriptor.getJobid(), 
+//			JobDetail job = new JobDetailImpl(jobDescriptor.getJobid(),
 //					jobDescriptor.getGroupid(), MyJob.class);
 			JobDetail job = JobBuilder.newJob(MyJob.class)
 					.withIdentity(jobDescriptor.getJobid(), jobDescriptor.getGroupid())
@@ -96,7 +96,7 @@ public class TestQuartz {
 				scheduler.addJob(job, true);
 				List<JobKey> dependencies = jobDescriptor.getDependencies();
 				for (JobKey jobkey : dependencies) {
-					chainListener.addJobChainLink(jobkey, job.getKey()); 
+					chainListener.addJobChainLink(jobkey, job.getKey());
 				}
 				scheduler.getListenerManager().addJobListener(
 						new MyJobListener(), KeyMatcher.keyEquals(job.getKey()));
