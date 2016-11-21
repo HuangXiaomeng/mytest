@@ -17,6 +17,7 @@
 		<hadoop.version>2.3.0</hadoop.version>
 		<jersey.version>2.18</jersey.version>
 		<jgrapht.version>0.9.1</jgrapht.version>
+		<kafka.version>0.10.0.1</kafka.version>
 	</properties>
 
 	<dependencies>
@@ -85,7 +86,13 @@
 			<artifactId>jgrapht-core</artifactId>
 			<version>${jgrapht.version}</version>
 		</dependency>
-
+		
+		<dependency>
+           <groupId>org.mogujie.ppcenter</groupId>
+           <artifactId>sdk</artifactId>
+           <version>1.0.8-SNAPSHOT</version>
+        </dependency>
+        
 	</dependencies>
 
 	<build>

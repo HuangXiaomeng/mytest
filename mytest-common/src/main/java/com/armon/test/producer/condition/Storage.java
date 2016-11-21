@@ -8,8 +8,8 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Storage {
     public static final int SIZE = 100;
     public static final Lock lock = new ReentrantLock();
-    public static final Condition full = lock.newCondition();
-    public static final Condition empty = lock.newCondition();
+    public static final Condition notFull = lock.newCondition();
+    public static final Condition notEmpty = lock.newCondition();
 
     private LinkedList<Object> objects = new LinkedList<>();
 

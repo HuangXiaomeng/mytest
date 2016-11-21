@@ -7,8 +7,8 @@ public class Consumer extends Thread {
     private Storage storage;
     private int num;
     private final Lock lock = Storage.lock;
-    private final Condition full = Storage.full;
-    private final Condition empty = storage.empty;
+    private final Condition notFull = Storage.notFull;
+    private final Condition notEmpty = storage.notEmpty;
 
     public Consumer(String name, Storage storage, int num) {
         super(name);
@@ -23,7 +23,7 @@ public class Consumer extends Thread {
             while (storage.size() < num) {
                 System.out.printf(currentThread().getName() + " 需要%d个商品，当前仓库库存%d，等待生产...\n", num, storage.size());
                 try {
-                    empty.await();
+                    notEmpty.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -32,7 +32,7 @@ public class Consumer extends Thread {
             while (counter-- > 0) {
                 storage.take();
             }
-            full.signalAll();
+            notFull.signalAll();
             System.out.printf(currentThread().getName() + " 从仓库取走%d个商品，当前仓库容量=%d\n", num, storage.size());
         } finally {
             lock.unlock();

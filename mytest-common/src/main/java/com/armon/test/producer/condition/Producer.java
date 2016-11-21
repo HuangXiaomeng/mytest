@@ -9,8 +9,8 @@ public class Producer extends Thread {
     private int num;
     private final int size = Storage.SIZE;
     private final Lock lock = Storage.lock;
-    private final Condition full = Storage.full;
-    private final Condition empty = storage.empty;
+    private final Condition notFull = Storage.notFull;
+    private final Condition notEmpty = storage.notEmpty;
 
     public Producer(String name, Storage storage, int num) {
         super(name);
@@ -26,7 +26,7 @@ public class Producer extends Thread {
                 System.out.printf(currentThread().getName() + " 仓库总量=%d, 当前仓库空间=%d，需要生产%d，空间不够，等待消费...\n",
                         Storage.SIZE, storage.size(), num);
                 try {
-                    full.await();
+                    notFull.await();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -35,7 +35,7 @@ public class Producer extends Thread {
             while (counter-- > 0) {
                 storage.put(new Object());
             }
-            empty.signalAll();
+            notEmpty.signalAll();
             System.out.printf(currentThread().getName() + " 向仓库添加%d个商品，当前仓库容量%d\n", num,  storage.size());
         } finally {
             lock.unlock();

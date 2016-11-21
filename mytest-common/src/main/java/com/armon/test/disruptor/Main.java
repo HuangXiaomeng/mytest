@@ -12,23 +12,30 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		ExecutorService es = Executors.newCachedThreadPool();
 		int bufferSize = 1024;
-		Disruptor<RecordEvent> disruptor = new Disruptor<RecordEvent>(RecordEvent.FACTORY, bufferSize, es, 
+		Disruptor<RecordEvent> disruptor = new Disruptor<RecordEvent>(RecordEvent.FACTORY, bufferSize, es,
 				ProducerType.MULTI, new BlockingWaitStrategy());
-		final ConsumerWithWorkerHandler[] consumers = new ConsumerWithWorkerHandler[5];
+		final ConsumerWithWorkerHandler[] consumers = new ConsumerWithWorkerHandler[0];
 		for (int i = 0; i < consumers.length; i++) {
 			consumers[i] = new ConsumerWithWorkerHandler();
 		}
 		disruptor.handleEventsWithWorkerPool(consumers);
 		disruptor.start();
 		es.shutdown();
-		
+
+
 		RingBuffer<RecordEvent> ringBuffer = disruptor.getRingBuffer();
-		ProducerWithTranslator producer = new ProducerWithTranslator(ringBuffer);
+		ProducerWithTranslator producer = new ProducerWithTranslator(disruptor);
 		for (int i = 0; i < 10; i++) {
 			producer.put(new Record("data:" + i));
-			Thread.sleep(1000);
+//			Thread.sleep(1000);
 		}
-		
+		System.out.println("size: " + (disruptor.getBufferSize() - disruptor.getRingBuffer().remainingCapacity()));
+
+		for (int  nextSequence = 0; nextSequence < 20; nextSequence++) {
+		    RecordEvent recordEvent = ringBuffer.get(nextSequence);
+		    System.out.println(recordEvent.getRecord());
+		}
+
 		disruptor.shutdown();
 	}
 }

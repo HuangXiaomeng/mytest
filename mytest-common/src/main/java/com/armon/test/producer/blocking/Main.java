@@ -1,9 +1,5 @@
 package com.armon.test.producer.blocking;
 
-import com.armon.test.producer.condition.Consumer;
-import com.armon.test.producer.condition.Producer;
-import com.armon.test.producer.condition.Storage;
-
 public class Main {
     public static void main(String[] args) {
         Storage storage = new Storage();
