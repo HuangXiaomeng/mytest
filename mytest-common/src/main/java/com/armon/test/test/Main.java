@@ -1,34 +1,38 @@
 package com.armon.test.test;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 public class Main {
-  public static void main(String[] args) {
-      int x = 4;
-      System.out.println(x >> 2 & 1);
-      System.out.println(x >> 1 & 1);
-      System.out.println(x & 1);
-    Map<Integer, String> map = new HashMap<Integer, String>();
-    map.put(123, "one two three");
-    map.put(21, "two one");
-    map.put(1, "one");
-    map.put(2, "two");
-    map.put(3, "three");
+    public static int count = 0;
 
-    Iterator<Entry<Integer, String>> it = map.entrySet().iterator();
-    Map.Entry<Integer, String> entry = null;
-    while (it.hasNext()) {
-      entry = it.next();
-    }
-    System.out.println("key= " + entry.getKey() + " and value= " + entry.getValue());
+    public static void inc() {
 
-    Boolean btrue = Boolean.TRUE;
-    if (btrue == true) {
-      System.out.println("true");
+        //这里延迟1毫秒，使得结果明显
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+        }
+
+        getAndInc();
     }
 
-  }
+    public static void main(String[] args) throws InterruptedException {
+
+        //同时启动1000个线程，去进行i++计算，看看实际结果
+
+        for (int i = 0; i < 1000; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Main.inc();
+                }
+            }).start();
+        }
+
+        Thread.sleep(5000);
+        //这里每次运行的值都有可能不同,可能为1000
+        System.out.println("运行结果:Counter.count=" + Main.count);
+    }
+
+    public static synchronized void getAndInc() {
+        count++;
+    }
 }

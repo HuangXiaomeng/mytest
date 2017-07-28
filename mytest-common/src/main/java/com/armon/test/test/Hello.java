@@ -3,10 +3,14 @@ package com.armon.test.test;
 public class Hello {
 
     public static void main(String[] args) {
-        for (String str : args) {
-            System.out.println("hadoop distcp -p -i hdfs://10.11.2.182:9000" + str + "/visit_date=2016-07-31 " + str + "/visit_date=2016-07-31");
+//        String msg = "建表限制：ABCDEFG；缺失权限：123456";
+        String msg = "缺失权限：123456";
+        if (msg.contains("缺失权限")) {
+            msg = msg.substring(msg.indexOf("缺失权限"));
+            System.out.println(msg);
+        } else {
+            System.out.println("OK");
         }
-
     }
 
 }
